@@ -2,41 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Magical Birthday Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Birthday Color Palette */
+    --background: 320 40% 97%;
+    --foreground: 340 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 320 60% 95%;
+    --card-foreground: 340 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 320 60% 98%;
+    --popover-foreground: 340 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Magical Pink & Purple Theme */
+    --primary: 330 80% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 330 100% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 280 60% 80%;
+    --secondary-foreground: 340 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 320 30% 92%;
+    --muted-foreground: 340 15% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 100% 70%;
+    --accent-foreground: 340 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 320 30% 85%;
+    --input: 320 30% 90%;
+    --ring: 330 80% 65%;
 
-    --radius: 0.5rem;
+    /* Custom Birthday Colors */
+    --birthday-pink: 330 80% 65%;
+    --birthday-purple: 280 60% 70%;
+    --birthday-gold: 45 100% 70%;
+    --birthday-soft: 320 60% 95%;
+    --birthday-magic: 290 70% 80%;
+
+    /* Gradients */
+    --gradient-birthday: linear-gradient(135deg, hsl(var(--birthday-pink)), hsl(var(--birthday-purple)));
+    --gradient-magic: linear-gradient(180deg, hsl(var(--birthday-soft)), hsl(var(--birthday-magic) / 0.3));
+    --gradient-sparkle: linear-gradient(45deg, hsl(var(--birthday-gold)), hsl(var(--accent)));
+
+    /* Shadows & Glows */
+    --shadow-magical: 0 20px 40px hsl(var(--birthday-purple) / 0.3);
+    --shadow-float: 0 10px 30px hsl(var(--birthday-pink) / 0.2);
+    --glow-birthday: 0 0 30px hsl(var(--birthday-gold) / 0.6);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +118,83 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
+}
+
+/* Custom Birthday Animations & Utilities */
+@layer utilities {
+  .birthday-gradient {
+    background: var(--gradient-birthday);
+  }
+  
+  .magic-gradient {
+    background: var(--gradient-magic);
+  }
+  
+  .sparkle-gradient {
+    background: var(--gradient-sparkle);
+  }
+  
+  .magical-shadow {
+    box-shadow: var(--shadow-magical);
+  }
+  
+  .float-shadow {
+    box-shadow: var(--shadow-float);
+  }
+  
+  .birthday-glow {
+    box-shadow: var(--glow-birthday);
+  }
+  
+  .blur-bg {
+    backdrop-filter: blur(20px);
+    background: hsl(var(--background) / 0.8);
+  }
+  
+  .magic-blur {
+    backdrop-filter: blur(15px);
+    background: hsl(var(--birthday-soft) / 0.6);
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+  
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+  
+  .animate-confetti {
+    animation: confetti-fall 3s linear infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px hsl(var(--birthday-gold) / 0.5); }
+  to { box-shadow: 0 0 40px hsl(var(--birthday-gold) / 0.8), 0 0 60px hsl(var(--birthday-pink) / 0.4); }
 }
