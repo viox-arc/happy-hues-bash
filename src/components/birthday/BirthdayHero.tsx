@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { FloatingBalloon } from "./FloatingBalloon";
 import { ConfettiRain } from "./ConfettiRain";
+import { useScrollBlur } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 import birthdayBg from "@/assets/birthday-bg.jpg";
 
 interface BirthdayHeroProps {
@@ -11,6 +13,7 @@ interface BirthdayHeroProps {
 export const BirthdayHero = ({ name = "Beautiful Soul" }: BirthdayHeroProps) => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [messageRevealed, setMessageRevealed] = useState(false);
+  const { getBlurClass } = useScrollBlur();
 
   const triggerCelebration = () => {
     setShowConfetti(true);
@@ -26,12 +29,15 @@ export const BirthdayHero = ({ name = "Beautiful Soul" }: BirthdayHeroProps) => 
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background with Dynamic Blur */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300"
         style={{ backgroundImage: `url(${birthdayBg})` }}
       />
-      <div className="absolute inset-0 magic-gradient opacity-80" />
+      <div className={cn("absolute inset-0 transition-all duration-500", getBlurClass())}>
+        <div className="absolute inset-0 bg-gradient-to-br from-birthday-dark via-birthday-magic/50 to-birthday-dark opacity-90" />
+        <div className="absolute inset-0 bg-gradient-radial from-birthday-purple/20 via-transparent to-transparent" />
+      </div>
 
       {/* Floating Balloons */}
       <div className="absolute top-20 left-10">
@@ -61,8 +67,8 @@ export const BirthdayHero = ({ name = "Beautiful Soul" }: BirthdayHeroProps) => 
           </div>
 
           {/* Magical Message */}
-          <div className="p-8 magic-blur rounded-3xl border border-birthday-gold/20 magical-shadow">
-            <p className="text-xl md:text-2xl text-birthday-purple leading-relaxed">
+          <div className="p-8 magic-blur rounded-3xl border border-birthday-purple/30 shadow-2xl">
+            <p className="text-xl md:text-2xl text-birthday-pink leading-relaxed font-medium">
               ✨ Today we celebrate the most amazing person! ✨
             </p>
             <p className="text-lg md:text-xl text-muted-foreground mt-4">
@@ -73,13 +79,14 @@ export const BirthdayHero = ({ name = "Beautiful Soul" }: BirthdayHeroProps) => 
           {/* Interactive Button */}
           <Button 
             onClick={triggerCelebration}
-            className="sparkle-gradient text-white px-12 py-6 text-xl font-bold rounded-full hover:scale-110 transition-all duration-300 birthday-glow animate-bounce-slow"
+            className="sparkle-gradient text-white px-12 py-6 text-xl font-bold rounded-full hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-birthday-gold/30"
+            style={{ boxShadow: '0 0 40px hsl(var(--birthday-gold) / 0.6), 0 0 80px hsl(var(--birthday-purple) / 0.4)' }}
           >
             🎈 Start the Celebration! 🎈
           </Button>
 
           {/* Click balloons hint */}
-          <p className="text-birthday-purple/80 text-lg animate-sparkle">
+          <p className="text-birthday-purple animate-sparkle text-lg font-medium">
             💫 Click the floating balloons for surprises! 💫
           </p>
         </div>

@@ -6,53 +6,56 @@
 
 @layer base {
   :root {
-    /* Birthday Color Palette */
-    --background: 320 40% 97%;
-    --foreground: 340 15% 15%;
+    /* Dark Birthday Color Palette */
+    --background: 260 15% 8%;
+    --foreground: 320 20% 95%;
 
-    --card: 320 60% 95%;
-    --card-foreground: 340 15% 15%;
+    --card: 260 15% 12%;
+    --card-foreground: 320 20% 95%;
 
-    --popover: 320 60% 98%;
-    --popover-foreground: 340 15% 15%;
+    --popover: 260 15% 10%;
+    --popover-foreground: 320 20% 95%;
 
-    /* Magical Pink & Purple Theme */
+    /* Magical Dark Pink & Purple Theme */
     --primary: 330 80% 65%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 330 100% 85%;
 
-    --secondary: 280 60% 80%;
-    --secondary-foreground: 340 15% 15%;
+    --secondary: 280 60% 20%;
+    --secondary-foreground: 320 20% 95%;
 
-    --muted: 320 30% 92%;
-    --muted-foreground: 340 15% 55%;
+    --muted: 260 15% 15%;
+    --muted-foreground: 320 15% 65%;
 
     --accent: 45 100% 70%;
-    --accent-foreground: 340 15% 15%;
+    --accent-foreground: 260 15% 8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 320 30% 85%;
-    --input: 320 30% 90%;
+    --border: 260 15% 18%;
+    --input: 260 15% 15%;
     --ring: 330 80% 65%;
 
-    /* Custom Birthday Colors */
+    /* Custom Dark Birthday Colors */
     --birthday-pink: 330 80% 65%;
     --birthday-purple: 280 60% 70%;
     --birthday-gold: 45 100% 70%;
-    --birthday-soft: 320 60% 95%;
-    --birthday-magic: 290 70% 80%;
+    --birthday-soft: 260 20% 15%;
+    --birthday-magic: 290 40% 20%;
+    --birthday-dark: 260 15% 8%;
 
-    /* Gradients */
+    /* Dark Gradients */
     --gradient-birthday: linear-gradient(135deg, hsl(var(--birthday-pink)), hsl(var(--birthday-purple)));
-    --gradient-magic: linear-gradient(180deg, hsl(var(--birthday-soft)), hsl(var(--birthday-magic) / 0.3));
+    --gradient-magic: linear-gradient(180deg, hsl(var(--birthday-dark)), hsl(var(--birthday-magic) / 0.8));
     --gradient-sparkle: linear-gradient(45deg, hsl(var(--birthday-gold)), hsl(var(--accent)));
+    --gradient-dark-glow: radial-gradient(circle at center, hsl(var(--birthday-purple) / 0.3), transparent 70%);
 
-    /* Shadows & Glows */
-    --shadow-magical: 0 20px 40px hsl(var(--birthday-purple) / 0.3);
-    --shadow-float: 0 10px 30px hsl(var(--birthday-pink) / 0.2);
-    --glow-birthday: 0 0 30px hsl(var(--birthday-gold) / 0.6);
+    /* Enhanced Shadows & Glows for Dark Mode */
+    --shadow-magical: 0 20px 40px hsl(var(--birthday-purple) / 0.5);
+    --shadow-float: 0 10px 30px hsl(var(--birthday-pink) / 0.3);
+    --glow-birthday: 0 0 40px hsl(var(--birthday-gold) / 0.8);
+    --glow-purple: 0 0 60px hsl(var(--birthday-purple) / 0.6);
 
     --radius: 1rem;
 
@@ -156,6 +159,18 @@
   .magic-blur {
     backdrop-filter: blur(15px);
     background: hsl(var(--birthday-soft) / 0.6);
+    border: 1px solid hsl(var(--birthday-purple) / 0.2);
+  }
+
+  .scroll-blur {
+    backdrop-filter: blur(25px);
+    background: hsl(var(--birthday-dark) / 0.9);
+    transition: backdrop-filter 0.3s ease, background 0.3s ease;
+  }
+
+  .scroll-blur-intense {
+    backdrop-filter: blur(40px);
+    background: hsl(var(--birthday-dark) / 0.95);
   }
   
   .animate-float {
@@ -177,6 +192,46 @@
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
   }
+
+  .animate-scroll-up {
+    animation: scrollUp 0.8s ease-out forwards;
+  }
+
+  .animate-scroll-fade {
+    animation: scrollFade 1s ease-out forwards;
+  }
+
+  .animate-scroll-scale {
+    animation: scrollScale 0.6s ease-out forwards;
+  }
+
+  .animate-scroll-slide-left {
+    animation: scrollSlideLeft 0.8s ease-out forwards;
+  }
+
+  .animate-scroll-slide-right {
+    animation: scrollSlideRight 0.8s ease-out forwards;
+  }
+
+  .scroll-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  .scroll-hidden-left {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  .scroll-hidden-right {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  .scroll-hidden-scale {
+    opacity: 0;
+    transform: scale(0.8);
+  }
 }
 
 @keyframes float {
@@ -197,4 +252,53 @@
 @keyframes glow {
   from { box-shadow: 0 0 20px hsl(var(--birthday-gold) / 0.5); }
   to { box-shadow: 0 0 40px hsl(var(--birthday-gold) / 0.8), 0 0 60px hsl(var(--birthday-pink) / 0.4); }
+}
+
+@keyframes scrollUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scrollFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scrollScale {
+  from { 
+    opacity: 0; 
+    transform: scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes scrollSlideLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes scrollSlideRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
 }
